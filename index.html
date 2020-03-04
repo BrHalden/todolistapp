@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-    <header>
-        <h1>To-do list</h1>
+    <header class="mainheader">
+        <h1 class="pagetitle">To-do list</h1>
     </header>
     <main>
         <form class="todoaddform">
-            <input type="text" name="todoItemDescription"
+            <input type="text" name="todoItemDescription" placeholder="Enter a task..."
                 class="todoaddform__description" />
             <button type="submit" class="todoaddform__submit">
                 Add
@@ -23,7 +23,7 @@
         <ul class="todolist">
             <li class="todolist__item">
                 <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
+                    <button class="todoitem__description todoitem__completedtoggle">
                         Go to the shops
                     </button>
                     <button class="todoitem__remove">
@@ -33,7 +33,7 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem todoitem--completed">
-                    <button class="todoitem__completedtoggle">
+                    <button class="todoitem__description todoitem__completedtoggle">
                         Task that has been completed
                     </button>
                     <button class="todoitem__remove">
@@ -43,7 +43,7 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
+                    <button class="todoitem__description todoitem__completedtoggle">
                         Really long task really long task really long task really long task really long task really long task really long task really long task really long task really long task 
                     </button>
                     <button class="todoitem__remove">
@@ -53,8 +53,8 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
-                        Task that has been completed
+                    <button class="todoitem__description todoitem__completedtoggle">
+                        Task that has not been completed
                     </button>
                     <button class="todoitem__remove">
                         Remove
@@ -63,8 +63,8 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem todoitem--completed">
-                    <button class="todoitem__completedtoggle">
-                        Really long task really long task really long task really long task really long task really long task really long task really long task really long task really long task 
+                    <button class="todoitem__description todoitem__completedtoggle">
+                        Really long task really long task really long task really really long task really
                     </button>
                     <button class="todoitem__remove">
                         Remove
@@ -73,8 +73,8 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
-                        Task that has been completed
+                    <button class="todoitem__description todoitem__completedtoggle">
+                        Start course work
                     </button>
                     <button class="todoitem__remove">
                         Remove
@@ -83,17 +83,7 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
-                        Really long task really long task really long task really long task really long task really long task really long task really long task really long task really long task 
-                    </button>
-                    <button class="todoitem__remove">
-                        Remove
-                    </button>
-                </div>
-            </li>
-            <li class="todolist__item">
-                <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
+                    <button class="todoitem__description todoitem__completedtoggle">
                         Go to the shops
                     </button>
                     <button class="todoitem__remove">
@@ -103,8 +93,8 @@
             </li>
             <li class="todolist__item">
                 <div class="todoitem">
-                    <button class="todoitem__completedtoggle">
-                        Task that has been completed
+                    <button class="todoitem__description todoitem__completedtoggle">
+                        Finish course work
                     </button>
                     <button class="todoitem__remove">
                         Remove
@@ -113,7 +103,7 @@
             </li>
         </ul>
     </main>
-    <footer>
+    <footer class="mainfooter">
         Noroff &copy; 2020
     </footer>
 </body>
