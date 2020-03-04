@@ -32,6 +32,7 @@ body {
     color: inherit;
     text-align: inherit;
     width: 100%;
+    background-color: inherit;
 
     padding: 0.5rem;
 }
@@ -65,6 +66,7 @@ body {
     color: inherit;
     text-align: inherit;
     width: 100%;
+    background-color: inherit;
 
     padding: 0.5rem;
 }
