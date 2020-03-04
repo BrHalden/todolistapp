@@ -32,7 +32,7 @@ body {
     color: inherit;
     text-align: inherit;
     width: 100%;
-    background-color: inherit;
+    background-color: white;
 
     padding: 0.5rem;
 }
@@ -52,7 +52,6 @@ body {
 
 .todoitem {
     display: flex;
-    background-color: white;
 }
 .todoitem--completed .todoitem__description {
     text-decoration: line-through;
@@ -66,7 +65,7 @@ body {
     color: inherit;
     text-align: inherit;
     width: 100%;
-    background-color: inherit;
+    background-color: white;
 
     padding: 0.5rem;
 }
