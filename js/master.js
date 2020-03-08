@@ -1,36 +1,100 @@
-const data = {
+const initialData = {
     title: "Todo list",
     year: (new Date()).getFullYear(),
     todo: {
-        items: [{
-            // Randomly generated UUID
-            "id": "123e4567-e89b-12d3-a456-426655440000",
-            // the text the user entered
-            "description": "Go to the shop",
-            // boolean – defaults to false
-            "isCompleted": true,
-        },{
-            // Randomly generated UUID
-            "id": "123e4567-e89b-12d3-a456-426655440000",
-            // the text the user entered
-            "description": "Test item 2",
-            // boolean – defaults to false
-            "isCompleted": false,
-        },{
-            // Randomly generated UUID
-            "id": "123e4567-e89b-12d3-a456-426655440000",
-            // the text the user entered
-            "description": "Test item 3",
-            // boolean – defaults to false
-            "isCompleted": true,
-        }]
+        items: []
     }
 };
 
+
 // get the root element
-const rootElem = document.getElementById("root");
-// render app with our data
-rootElem.innerHTML = App(data);
+renderApp(initialData);
+
+function renderApp(data) {
+    const rootElem = document.getElementById("root");
+    // render app with our data
+    rootElem.innerHTML = App(data);
+    // add new task submitted event
+    rootElem.querySelector(".todoaddform")
+        .addEventListener("submit", (event) => handleTodoFormAdd(event, data));
+    // add toggling task event
+    data.todo.items.forEach(item => {
+        // Toggle completed
+        rootElem.querySelector(`[data-toggleid="${item.id}"`)
+            .addEventListener("click", (event) => handleTodoItemToggle(event, data, item));
+        // Remove item
+        rootElem.querySelector(`[data-removeid="${item.id}"`)
+            .addEventListener("click", (event) => handleRemoveTodoItem(event, data, item));
+    })
+}
+
+function handleTodoFormAdd(event, data) {
+    event.preventDefault();
+
+    const newItem = {
+        // Randomly generated UUID
+        "id": uuidv4(),
+        // the text the user entered
+        "description": event.target.elements.todoItemDescription.value,
+        // boolean – defaults to false
+        "isCompleted": false,
+    };
+
+    // create new data object
+    const updatedData = {
+        // use original data
+        ...data,
+        // over
+        todo: {
+            items: [
+                ...data.todo.items,
+                newItem
+            ]
+        }
+    };
+
+    // re-render
+    renderApp(updatedData);
+}
+
+function handleTodoItemToggle(event, data, clickedItem) {
+    // look for the clicked item and update it, all other items remain the same
+    const newItems = data.todo.items
+        .map(item => {
+            return item.id !== clickedItem.id ? item : {
+                ...item,
+                isCompleted: !item.isCompleted,
+            }
+        });
+    
+    // create new data object
+    const updatedData = {
+        ...data,
+        todo: {
+            items: newItems
+        }
+    }
+
+    // re-render
+    renderApp(updatedData);
+}
+
+function handleRemoveTodoItem(event, data, clickedItem) {
+    // filtered out the clicked item
+    const newItems = data.todo.items
+        .filter(item => item.id !== clickedItem.id);
+    
+    // create new data object
+    const updatedData = {
+        ...data,
+        todo: {
+            items: newItems
+        }
+    }
+
+    // re-render
+    renderApp(updatedData);
+}
 
 function TodoItem(props) {
     // add completed class name if the task is completed
@@ -99,3 +163,11 @@ function App(props) {
         </footer>
     `;
 }
+
+// Taken from: https://stackoverflow.com/a/2117523
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}  
