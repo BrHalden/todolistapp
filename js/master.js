@@ -2,7 +2,7 @@ const initialData = {
     title: "Todo list",
     year: (new Date()).getFullYear(),
     todo: {
-        items: []
+        items: load("todoitems") || []
     }
 };
 
@@ -25,7 +25,9 @@ function renderApp(data) {
         // Remove item
         rootElem.querySelector(`[data-removeid="${item.id}"`)
             .addEventListener("click", (event) => handleRemoveTodoItem(event, data, item));
-    })
+    });
+
+    save("todoitems", data.todo.items);
 }
 
 function handleTodoFormAdd(event, data) {
@@ -127,10 +129,13 @@ function TodoList(props) {
         <ul class="todolist">
             ${
                 // render TodoListItem component for each item
-                props.items.map(function(todoItem) {
-                    return TodoListItem(todoItem);
-                })
-                .join("")
+                props.items
+                    .slice()
+                    .reverse()
+                    .map(function(todoItem) {
+                        return TodoListItem(todoItem);
+                    })
+                    .join("")
             }
         </ul>
     `;
@@ -170,4 +175,12 @@ function uuidv4() {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
-}  
+}
+
+function load(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function save(key, value) {
+    return localStorage.setItem(key, JSON.stringify(value));
+}
